@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>GPT3.5 API Demo</title>
+</head>
+
+<body>
+    <div>
+        <label for="api-key">API Key:</label>
+        <input type="text" id="api-key" name="apiKey">
+    </div>
+    <div>
+        <label for="question">質問文:</label>
+        <textarea id="question" name="message" rows="4" cols="50"></textarea>
+    </div>
+    <div>
+        <button id="submit-btn">質問する！</button>
+    </div>
+    <div>
+        <label for="answer">回答</label>
+        <textarea id="answer" name="answer" rows="8" cols="50" readonly></textarea>
+    </div>
+    <script>
+        const apiKeyInput = document.getElementById('api-key');
+        const questionInput = document.getElementById('question');
+        const answerOutput = document.getElementById('answer');
+        const submitButton = document.getElementById('submit-btn');
+
+        submitButton.addEventListener('click', async () => {
+            const apiKey = apiKeyInput.value;
+            const question = questionInput.value;
+            const data = {
+                apiKey: apiKey,
+                message: question
+            }
+            // ここ直す
+            const response = await fetch('http://localhost:3000/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(data)
+            });
+
+            if (response.ok) {
+                res = await response.json();
+                console.log(res);
+                answerOutput.value = await res.content;
+            } else {
+                answerOutput.value = 'Error: ' + response.statusText;
+            }
+        });
+    </script>
+</body>
+
+</html>
