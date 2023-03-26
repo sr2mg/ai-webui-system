@@ -3,12 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>GPT3.5 API Demo</title>
+    <title>AI Web-UI System</title>
 </head>
 
 <body>
+    <h1>AI Web-UI System</h1>
+    <h2>概要</h2>
+    <p>各AIモデルが気軽に使えるシステムです</p>
     <div>
-        <label for="api-key">API Key:</label>
+        <label for="api-key">API Key</label>
         <input type="text" id="api-key" name="apiKey">
     </div>
     <div>
@@ -30,9 +33,17 @@
         <label for="answer">回答</label>
         <textarea id="answer" name="answer" rows="8" cols="50" readonly></textarea>
     </div>
+    <h2>
+        使い方
+    </h2>
     <p>
-        使い方！API Keyを入力して質問文を入力して質問ボタンを押すと回答が返ってきます！API Keyは<a
-            href="https://platform.openai.com/account/api-keys">OpenAI</a>にアクセスし、Create new secret keyから取得してください！
+        API Keyを入力して質問文を入力して質問ボタンを押すと回答が返ってきます。</p>
+    <h2>APIKey取得リンク一覧</h2>
+    <ul>
+        <li><a href="https://platform.openai.com/account/api-keys" target="_blank" rel="noreferrer noopener">OpenAI</a>
+        </li>
+        <li><a href="https://developers.rinna.co.jp/profile" target="_blank" rel="noreferrer noopener">リンナ</a></li>
+    </ul>
     </p>
     <script>
         const apiKeyInput = document.getElementById('api-key');
@@ -49,7 +60,6 @@
                 apiKey: apiKey,
                 message: question
             }
-            console.log("送信")
             const response = await fetch(API_ENDPOINT + '/chat/' + model, {
                 method: 'POST',
                 headers: {
