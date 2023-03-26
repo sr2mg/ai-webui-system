@@ -27,7 +27,7 @@
         const questionInput = document.getElementById('question');
         const answerOutput = document.getElementById('answer');
         const submitButton = document.getElementById('submit-btn');
-
+        const API_ENDPOINT = 'http://localhost:3000';
         submitButton.addEventListener('click', async () => {
             const apiKey = apiKeyInput.value;
             const question = questionInput.value;
@@ -36,7 +36,7 @@
                 message: question
             }
             // ここ直す
-            const response = await fetch('http://localhost:3000/chat', {
+            const response = await fetch(API_ENDPOINT + '/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
