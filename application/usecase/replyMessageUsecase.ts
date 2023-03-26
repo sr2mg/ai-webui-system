@@ -9,7 +9,6 @@ class ReplyMessageUseCase {
 
   async execute(input, apiKey) {
     const gptResponse = await this.gptApi.callgptApi(input, apiKey);
-    //const chatMessage = new ChatMessage(gptResponse, "bot");
     return gptResponse;
   }
 }
