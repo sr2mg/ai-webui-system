@@ -16,15 +16,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-app.post("/chat/gpt3", (req, res) => {
-  gpt3Controller.reply(req, res);
-});
-app.post("/chat/gpt35", (req, res) => {
-  gpt35Controller.reply(req, res);
-});
-app.post("/chat/rinna", (req, res) => {
-  rinnaController.reply(req, res);
-});
+app.post("/chat/gpt3", gpt3Controller.reply);
+app.post("/chat/gpt35", gpt35Controller.reply);
+app.post("/chat/rinna", rinnaController.reply);
 
 app.get("/", (req, res) => {
   res.redirect("/index.html");
