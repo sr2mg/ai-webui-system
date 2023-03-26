@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { ReplyMessageUseCase } from "../usecase/index";
 import ChatMessage from "../../domain/entity/chatMessage";
-import RinnaApi from "../../interface/rinnaApi";
+import { RinnaApi } from "../../interface/index";
 import Dotenv from "dotenv";
 
 class RinnaController {

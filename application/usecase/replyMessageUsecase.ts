@@ -7,6 +7,7 @@ class ReplyMessageUseCase {
   }
 
   async execute(input, apiKey, endpoint) {
+    console.log("ReplyMessageUseCase.execute");
     const gptResponse = await this.Api.call(input, apiKey, endpoint);
     return gptResponse;
   }
