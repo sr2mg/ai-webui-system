@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import { ReplyMessageUseCase } from "../usecase/index";
 import ChatMessage from "../../domain/entity/chatMessage";
-import OpenaiApi from "../../interface/openaiApi";
+import RinnaApi from "../../interface/rinnaApi";
 import Dotenv from "dotenv";
-class Gpt35Controller {
+
+class RinnaController {
   useCase: ReplyMessageUseCase;
   constructor() {
-    this.useCase = new ReplyMessageUseCase(new OpenaiApi());
+    this.useCase = new ReplyMessageUseCase(new RinnaApi());
     Dotenv.config();
   }
 
@@ -14,23 +15,22 @@ class Gpt35Controller {
     const apiKey =
       request.body.apiKey !== ""
         ? request.body.apiKey
-        : process.env.OPENAI_API_KEY;
+        : process.env.RINNA_API_KEY;
     const message = request.body.message;
     const data = {
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: message }],
+      rawInput: message,
     };
-    const endpoint = "v1/chat/completions";
+    const endpoint = "models/cce";
     const return_json = await this.useCase.execute(data, apiKey, endpoint);
     // return_jsonがえらーのときの処理
     let content = "";
-    if (return_json["error"] !== undefined) {
-      content = return_json["error"]["message"];
+    if (response.statusCode !== 200) {
+      content = return_json["status"] + ":" + return_json["error"]["RawInput"];
     } else {
-      content = return_json["choices"][0]["message"]["content"];
+      content = return_json["answer"];
     }
     const chatMessage: ChatMessage = new ChatMessage(content, "bot");
     response.status(200).json(chatMessage);
   }
 }
-export default Gpt35Controller;
+export default RinnaController;

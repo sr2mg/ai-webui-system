@@ -12,6 +12,14 @@
         <input type="text" id="api-key" name="apiKey">
     </div>
     <div>
+        <label for="model">モデル</label>
+        <select name="model" id="model">
+            <option value="gpt3">GPT3</option>
+            <option value="gpt35">GPT3.5</option>
+            <option value="rinna">リンナ</option>
+        </select>
+    </div>
+    <div>
         <label for="question">質問文:</label>
         <textarea id="question" name="message" rows="4" cols="50"></textarea>
     </div>
@@ -31,16 +39,18 @@
         const questionInput = document.getElementById('question');
         const answerOutput = document.getElementById('answer');
         const submitButton = document.getElementById('submit-btn');
+        const modelSelect = document.getElementById('model');
         const API_ENDPOINT = 'http://localhost:3000';
         submitButton.addEventListener('click', async () => {
             const apiKey = apiKeyInput.value;
             const question = questionInput.value;
+            const model = modelSelect.value;
             const data = {
                 apiKey: apiKey,
                 message: question
             }
-            // ここ直す
-            const response = await fetch(API_ENDPOINT + '/chat', {
+            console.log("送信")
+            const response = await fetch(API_ENDPOINT + '/chat/' + model, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

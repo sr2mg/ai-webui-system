@@ -1,6 +1,7 @@
-class GptApi {
-  async callgptApi(data, apiKey): Promise<JSON> {
-    const apiUrl = "https://api.openai.com/v1/chat/completions";
+import ApiInterface from "./apiInterface";
+class OpenaiApi implements ApiInterface {
+  async call(data, apiKey, endpoint): Promise<JSON> {
+    const apiUrl = "https://api.openai.com/" + endpoint;
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${apiKey}`,
@@ -16,4 +17,4 @@ class GptApi {
     return json;
   }
 }
-export default GptApi;
+export default OpenaiApi;

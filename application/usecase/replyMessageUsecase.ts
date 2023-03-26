@@ -1,14 +1,13 @@
-import ChatMessage from "../../domain/entity/chatMessage";
-import GptApi from "../../interface/gptApi";
+import ApiInterface from "../../interface/apiInterface";
 
 class ReplyMessageUseCase {
-  gptApi: GptApi;
-  constructor(gptApi = new GptApi()) {
-    this.gptApi = gptApi;
+  Api: ApiInterface;
+  constructor(Api: ApiInterface) {
+    this.Api = Api;
   }
 
-  async execute(input, apiKey) {
-    const gptResponse = await this.gptApi.callgptApi(input, apiKey);
+  async execute(input, apiKey, endpoint) {
+    const gptResponse = await this.Api.call(input, apiKey, endpoint);
     return gptResponse;
   }
 }
