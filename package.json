@@ -20,6 +20,7 @@
   "scripts": {
     "start": "ts-node index.ts",
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "docker:build": "docker build -t ai-webui-system ."
   }
 }
