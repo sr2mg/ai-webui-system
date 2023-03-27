@@ -1,6 +1,7 @@
+import fetch from "node-fetch";
 import ApiInterface from "./apiInterface";
 class OpenaiApi implements ApiInterface {
-  async call(data, apiKey, endpoint): Promise<JSON> {
+  async call(data, apiKey, endpoint): Promise<any> {
     const apiUrl = "https://api.openai.com/" + endpoint;
     const headers = {
       "Content-Type": "application/json",
