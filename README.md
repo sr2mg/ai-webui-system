@@ -9,6 +9,9 @@ node v18.15.0
 `cd ai-webui-system`  
 `npm install`  
 
+## How to start API for beginner with Windows
+execute `start.bat`
+and, access to http://localhost:3000
 ## How to start API
 `npm start`  
 and, access to localhost:3000
